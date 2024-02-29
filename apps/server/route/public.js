@@ -83,7 +83,7 @@ export default {
         url = await uploadS3(filepath, filename)
       } else {
         // 头像或者图片上传
-        const filename = `avatar/${dayjs().format(
+        const filename = `video/avatar/${dayjs().format(
           'YYYYMMDD'
         )}/${hash}.${fileExtension}`
         url = await uploadS3(filepath, filename)
@@ -259,20 +259,21 @@ export default {
         {
           $limit: 10
         },
-        {
-          $lookup: {
-            from: 'like',
-            localField: 'series',
-            foreignField: 'series',
-            as: 'likeList',
-            pipeline: [
-              { $match: { user: { $eq: '65731d824b4efadf4b82a93d' } } }
-            ]
-          }
-        },
+        // {
+        //   $lookup: {
+        //     from: 'like',
+        //     localField: 'series',
+        //     foreignField: 'series',
+        //     as: 'likeList',
+        //     pipeline: [
+        //       { $match: { user: { $eq: '65731d824b4efadf4b82a93d' } } }
+        //     ]
+        //   }
+        // },
         {
           $addFields: {
-            isLike: { $toBool: { $size: '$likeList' } }
+            // isLike: { $toBool: { $size: '$likeList' } }
+            isLike: false
           }
         },
         // { $addFields: { video: { $first: '$video' } } },

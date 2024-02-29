@@ -29,7 +29,6 @@
     "aws-sdk": "^2.1511.0",
     "bignumber.js": "^9.1.1",
     "chalk": "^5.2.0",
-    "chinese-random-name": "^2.0.0",
     "dayjs": "^1.11.10",
     "ethers": "^6.0.8",
     "fluent-ffmpeg": "^2.1.2",

@@ -1,5 +1,5 @@
 FROM node:18.19.0-alpine
-LABEL maintainer "Rome Jiang <romejiang@gmail.com>"
+LABEL maintainer "LiQingYou <liqingyou1993@gmail.com>"
 WORKDIR /app
 
 RUN npm install --global "pnpm"
