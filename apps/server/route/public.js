@@ -69,12 +69,11 @@ export default {
         const filename = `video/${dayjs().format(
           'YYYYMMDD'
         )}/${hash}.${fileExtension}`
-        ffmpeg(filepath)
-          .on('end', async function () {
-            const screenshotfile = `${process.cwd()}/screenshots/${hash}.png`
-            await uploadS3(screenshotfile, filename + '.png')
-            fs.unlinkSync(screenshotfile)
-          })
+        ffmpeg(filepath).on('end', async function () {
+          const screenshotfile = `${process.cwd()}/screenshots/${hash}.png`
+          await uploadS3(screenshotfile, filename + '.png')
+          fs.unlinkSync(screenshotfile)
+        })
           .screenshots({
             timestamps: [0],
             filename: `${hash}.png`,
@@ -321,7 +320,7 @@ export default {
     // 更新视频的评论数
     const ret_update = await mongo.col('episode').findOneAndUpdate(
       { _id: new ObjectId(document.vid) },
-      { $inc: { "comments":1 } },
+      { $inc: { "comments": 1 } },
       { returnDocument: 'after', returnNewDocument: true }
     )
 

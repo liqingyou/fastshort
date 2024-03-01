@@ -11,7 +11,7 @@
       "listen-timeout": 10000,
       "merge_logs": true,
       "env": {
-        "PLATFORM": "PROD",
+        "PLATFORM": "DEV",
         "NODE_OPTIONS": "--openssl-legacy-provider"
       }
     }

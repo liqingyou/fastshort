@@ -3,6 +3,18 @@ import { success, fail } from '#@/lib/response.js'
 import { ObjectId } from 'mongodb'
 
 export default {
+  // 记录-保存
+  async log_save() {
+    try {
+      const document = ctx.request.body
+      // 先查询是否存在,如果存在就更新时间
+      
+      const ret = await mongo.col('user').insertOne(document)
+      success(ctx, {})
+    } catch (error) {
+      fail(ctx, '服务器错误')
+    }
+  },
   // 我的收藏，列表
   async favorite(ctx) {
     try {

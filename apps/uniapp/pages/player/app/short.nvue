@@ -50,7 +50,7 @@
                   @play="videoPlay(i)"
                   :enable-progress-gesture="false"
                   :page-gesture="false"
-                  :controls="false"
+                  :controls="controlShow"
                   :http-cache="true"
                   :show-loading="false"
                   :show-fullscreen-btn="false"
@@ -58,6 +58,7 @@
                   :style="styleWidthHeight"
                   object-fit="contain"
                   @timeupdate="videoTimeUpdate($event, i)"
+				  @fullscreenchange="fullChange()"
                 ></video>
                 <!-- 这里是封面 -->
                 <!-- <image
@@ -184,7 +185,9 @@ export default {
       // 临时变量，用于定时器
       pauseTimer: null,
       preloadTimer: null,
-      timers: ''
+      timers: '',
+	  
+	  controlShow: false
     }
   },
 
@@ -438,7 +441,7 @@ export default {
       //   title: '分享',
       //   icon: 'none'
       // })
-	  this.getVideoContext(this.currentPlayer).enterFullScreen();
+	  this.getVideoContext(this.currentPlayer).requestFullScreen();
     },
 
     clickLike(like) {
@@ -468,7 +471,12 @@ export default {
         title: '处理声音',
         icon: 'none'
       })
-    }
+    },
+	// 全屏事件
+	fullChange() {
+		this.controlShow = !this.controlShow
+	}
+	
   }
 }
 </script>

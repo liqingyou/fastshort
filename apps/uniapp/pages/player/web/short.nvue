@@ -15,7 +15,7 @@
               :id="videoItem._id"
               :loop="false"
               :muted="videoItem.state != 'play'"
-              :controls="false"
+              :controls="controlShow"
               :http-cache="true"
               :page-gesture="false"
               :show-fullscreen-btn="true"
@@ -29,6 +29,7 @@
               @timeupdate="playerTimeUpdate($event, index)"
               style="z-index: -1"
               :style="styleWidthHeight"
+			  @fullscreenchange="fullChange()"
             ></video>
             <!-- 这里是封面 TODO -->
           </view>
@@ -130,8 +131,10 @@ export default {
 
       // -- 进度条相关 -- start
       progressBarPercent: 0,
-      timeduration: 0
+      timeduration: 0,
       // -- 进度条相关 -- end
+	  
+	  controlShow : false
     }
   },
   computed: {
@@ -327,7 +330,10 @@ export default {
         !this.dataList[this.currentPlayer].isLike
       const video = this.dataList[this.currentPlayer]
       like ? (video.like > 0 ? video.like-- : (video.like = 0)) : video.like++
-    }
+    },
+	fullChange() {
+		this.controlShow = !this.controlShow
+	}
   }
 }
 </script>
