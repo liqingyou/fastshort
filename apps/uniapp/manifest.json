@@ -1,12 +1,18 @@
 {
     "name" : "ShortTV",
-    "appid" : "__UNI__961D650",
-    "description" : "",
+    "appid" : "__UNI__1BFE97D",
+    "description" : "ShortTV",
     "versionName" : "1.0.2",
     "versionCode" : 102,
     "locale" : "en",
     "transformPx" : false,
     "app-plus" : {
+        "screenOrientation" : [
+            "portrait-primary",
+            "portrait-secondary",
+            "landscape-primary",
+            "landscape-secondary"
+        ],
         "usingComponents" : true,
         "nvueStyleCompiler" : "uni-app",
         "compilerVersion" : 3,
@@ -28,9 +34,7 @@
         },
         "modules" : {
             "VideoPlayer" : {},
-            "OAuth" : {},
-            "Statistic" : {},
-            "Payment" : {}
+            "Camera" : {}
         },
         "distribute" : {
             "android" : {
@@ -61,29 +65,14 @@
             },
             "sdkConfigs" : {
                 "ad" : {},
-                "oauth" : {
-                    "google" : {
-                        "clientid" : "209268847453-hh2i28r24johqadhuggrd687kvg35rfn.apps.googleusercontent.com"
-                    },
-                    "facebook" : {
-                        "appid" : "1011986223434361",
-                        "client_token" : "7744592defec420015fdeec72edafd3d"
-                    },
-                    "apple" : {}
-                },
+                "oauth" : {},
                 "statics" : {
                     "google" : {
                         "config_ios" : "/Users/stephen/Projects/Xian/tiktokapp/fastshort/apps/uniapp/certificates/statistic2/AppleGoogleService-Info.plist",
                         "config_android" : "/Users/stephen/Projects/Xian/tiktokapp/fastshort/apps/uniapp/certificates/statistic2/android-google-services.json"
                     }
                 },
-                "payment" : {
-                    "paypal" : {
-                        "__platform__" : [ "ios", "android" ],
-                        "returnURL_ios" : "uni.uni961d650://paypalpay",
-                        "returnURL_android" : "uni.uni961d650://paypalpay"
-                    }
-                }
+                "payment" : {}
             },
             "icons" : {
                 "android" : {
@@ -118,7 +107,8 @@
                 }
             },
             "splashscreen" : {
-                "useOriginalMsgbox" : true
+                "useOriginalMsgbox" : true,
+                "androidStyle" : "common"
             }
         }
     },

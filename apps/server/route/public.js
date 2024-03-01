@@ -310,5 +310,71 @@ export default {
     } catch (error) {
       fail(ctx, 'Server error')
     }
+  },
+  // 评论-保存
+  async comment_save(ctx) {
+    const document = ctx.request.body
+    document.createdAt = new Date().getTime()
+    document.updatedAt = new Date().getTime()
+    const ret = await mongo.col('comment').insertOne(document)
+
+    // 更新视频的评论数
+    const ret_update = await mongo.col('episode').findOneAndUpdate(
+      { _id: new ObjectId(document.vid) },
+      { $inc: { "comments":1 } },
+      { returnDocument: 'after', returnNewDocument: true }
+    )
+
+    try {
+      success(ctx, { id: ret.insertedId })
+    } catch (error) {
+      fail(ctx, '服务器错误')
+    }
+  },
+  // 评论-列表
+  async comment_list(ctx) {
+    try {
+      const { page, form, sort } = ctx.request.body
+      let { currentPage, pageSize } = page
+
+      const sorting = {}
+      if (Object.keys(sort).length !== 0) {
+        sorting[sort.prop] = sort.asc ? -1 : 1
+      } else {
+        sorting['updatedAt'] = -1
+      }
+
+      pageSize = Number(pageSize || 20)
+      currentPage = Number(currentPage || 1)
+      const offset = (currentPage - 1) * pageSize
+
+      const query = {}
+      for (const key in form) {
+        if (Object.hasOwnProperty.call(form, key)) {
+          const element = form[key]
+          query[key] = { $regex: element }
+        }
+      }
+
+      console.log(query)
+
+      const records = await mongo
+        .col('comment')
+        .find(query)
+        .sort(sorting)
+        .limit(pageSize)
+        .skip(offset)
+        .toArray()
+      const total = await mongo.col('comment').countDocuments(form)
+      success(ctx, {
+        currentPage,
+        pageSize,
+        total,
+        records
+      })
+    } catch (error) {
+      console.log(error)
+      fail(ctx, '服务器错误')
+    }
   }
 }

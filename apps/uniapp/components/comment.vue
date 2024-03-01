@@ -6,7 +6,7 @@
   >
     <image
       src="@/static/img/index/liaotian-2.png"
-      style="width: 35px; height: 35px; position: absolute; right: 7px"
+      style="width: 40px; height: 40px; position: absolute; right: 7px"
     ></image>
     <text
       style="

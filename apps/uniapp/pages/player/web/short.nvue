@@ -18,11 +18,11 @@
               :controls="false"
               :http-cache="true"
               :page-gesture="false"
-              :show-fullscreen-btn="false"
+              :show-fullscreen-btn="true"
               :show-loading="true"
               :show-center-play-btn="false"
               :enable-progress-gesture="false"
-              object-fit="cover"
+              object-fit="contain"
               :src="videoItem.video[0]"
               @ended="playerEnded"
               @click="playerClick(videoItem.state)"
@@ -81,7 +81,7 @@
     </swiper>
 
     <uni-popup ref="pinglun">
-      <comments @closeComment="closeComment"></comments>
+      <comments v-if="dataList.length" :dataList="dataList" :current="currentPlayer" @closeComment="closeComment"></comments>
     </uni-popup>
   </view>
 </template>
@@ -306,10 +306,11 @@ export default {
       this.videoID = this.dataList[this.currentPlayer]._id
     },
     clickShare() {
-      uni.showToast({
-        title: '分享',
-        icon: 'none'
-      })
+      // uni.showToast({
+      //   title: '分享',
+      //   icon: 'none'
+      // })
+	  this.getVideoContext(this.currentPlayer).requestFullScreen();
     },
     clickAvatar(i) {},
     openComment(index) {

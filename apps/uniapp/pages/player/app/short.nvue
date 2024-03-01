@@ -56,7 +56,7 @@
                   :show-fullscreen-btn="false"
                   :show-center-play-btn="false"
                   :style="styleWidthHeight"
-                  object-fit="cover"
+                  object-fit="contain"
                   @timeupdate="videoTimeUpdate($event, i)"
                 ></video>
                 <!-- 这里是封面 -->
@@ -434,10 +434,11 @@ export default {
       this.$refs.pinglun.open('bottom')
     },
     clickShare() {
-      uni.showToast({
-        title: '分享',
-        icon: 'none'
-      })
+      // uni.showToast({
+      //   title: '分享',
+      //   icon: 'none'
+      // })
+	  this.getVideoContext(this.currentPlayer).enterFullScreen();
     },
 
     clickLike(like) {

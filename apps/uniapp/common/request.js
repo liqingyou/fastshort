@@ -1,9 +1,11 @@
 import store from '@/store/index.js'
 
 let url = 'http://192.168.205.110:3000/api'
-// let url = 'http://127.0.0.1:3000/api'
+// let url = 'http://101.33.33.229:3000/api'
+
 if (process.env.NODE_ENV == 'production') {
-  url = 'https://api.fastshort.top/api'
+  // url = 'https://api.fastshort.top/api'
+  url = 'http://101.33.33.229:3000/api'
 }
 
 export const BASE_URL = url
